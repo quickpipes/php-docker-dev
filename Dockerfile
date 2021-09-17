@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8-fpm
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -27,10 +27,7 @@ RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 RUN "date"
 
 # Type docker-php-ext-install to see available extensions
-RUN docker-php-ext-install pdo pdo_mysql calendar bcmath sockets \
-    && pecl install amqp \
-    && docker-php-ext-enable amqp
+RUN docker-php-ext-install pdo pdo_mysql calendar bcmath
 
 RUN symfony server:ca:install
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-#ENTRYPOINT /usr/local/bin/symfony server:start --allow-http --no-tls --dir=/quickpipes-api --port=80
