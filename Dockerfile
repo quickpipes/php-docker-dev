@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y \
     git \
     vim \
     unzip \
+    libicu-dev \
     curl \
     librabbitmq-dev \
     libssh-dev \
@@ -18,6 +19,6 @@ RUN rm /etc/localtime
 RUN ln -s /usr/share/zoneinfo/UTC /etc/localtime
 
 # Type docker-php-ext-install to see available extensions
-RUN docker-php-ext-install pdo pdo_mysql calendar bcmath
+RUN docker-php-ext-install pdo pdo_mysql calendar bcmath intl
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
